@@ -28,7 +28,8 @@ Attach screenshots in a `/proof` folder:
 Add project screenshots:
 
 ![Dashboard Screenshot](./assets/screenshot1.png)  
-![Classification Screenshot](./assets/screenshot2.png)
+![Input Screenshot](./assets/screenshot2.png)  
+![Classification Screenshot](./assets/screenshot3.png)
 
 ---
 

@@ -34,11 +34,18 @@ export default function AnalysisForm() {
         body: JSON.stringify({ images, context }),
       });
 
-      const data = await response.json();
-
       if (!response.ok) {
-        throw new Error(data.error || "Failed to analyze images. Please try again.");
+        const contentType = response.headers.get("content-type");
+        if (contentType && contentType.includes("application/json")) {
+          const errorData = await response.json();
+          throw new Error(errorData.error || "Failed to analyze images. Please try again.");
+        } else {
+          const textError = await response.text();
+          throw new Error(`Server error (${response.status}): ${textError.slice(0, 50) || response.statusText}`);
+        }
       }
+
+      const data = await response.json();
 
       setResult(data.result);
       saveEntry({ images, context, result: data.result });
